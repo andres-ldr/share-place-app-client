@@ -15,7 +15,7 @@ const ITEMS = [
       lat: 40.7484405,
       lng: -73.9878584,
     },
-    creatorId: "uid1",
+    creatorId: "u1",
   },
   {
     id: "p2",
@@ -28,7 +28,7 @@ const ITEMS = [
       lat: 40.7484405,
       lng: -73.9878584,
     },
-    creatorId: "uid1",
+    creatorId: "u1",
   },
 ];
 
