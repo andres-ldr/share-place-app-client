@@ -1,18 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import UserList from "../components/UserList";
 
 const Users = () => {
-  const USERS = [
-    {
-      id: 'u1',
-      name: 'Andres',
-      image:
-        'https://imgs.search.brave.com/pdhIT8GMxNeASsJ6uILi7_6cAxFuD6km_mbSK0wFx1E/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ExL2Fj/L2EzL2ExYWNhM2Iw/MTU2MTA3ZWQ3ZGNl/YzhjZTA3NWVjOWZl/LmpwZw',
-      places: 5,
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const [loadedUsers, setLoadedUsers] = useState();
 
-  return <UserList items={USERS} />;
+  useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://localhost:5000/api/users");
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+        
+        setLoadedUsers(responseData.users);
+      } catch (err) {
+        setError(err.message);
+      }
+      setIsLoading(false);
+    };
+    sendRequest();
+  }, []);
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={errorHandler}/>
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner/>
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UserList items={loadedUsers} />}
+    </React.Fragment>
+  );
 };
 
 export default Users;
