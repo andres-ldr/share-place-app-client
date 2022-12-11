@@ -5,6 +5,7 @@ import Button from "../../shared/components/FormElements/Button/Button";
 import { useForm } from "../../shared/hooks/form-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import ImagaeUpload from "../../shared/components/FormElements/ImageUpload";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -14,6 +15,7 @@ import {
 import "./Auth.css";
 import Card from "../../shared/components/UIElements/Card";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
@@ -115,6 +117,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
+          {!isLoading && <ImageUpload id="image" center />}
           <Input
             id="email"
             element="input"
