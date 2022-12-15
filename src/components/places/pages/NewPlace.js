@@ -13,6 +13,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 import { useHistory } from "react-router-dom";
+import { getNextKeyDef } from "@testing-library/user-event/dist/keyboard/getNextKeyDef";
 
 const NewPlace = () => {
   const auth = useContext(AuthContext);
@@ -46,7 +47,9 @@ const NewPlace = () => {
       formData.append("address", formState.inputs.address.value);
       formData.append("image", formState.inputs.image.value);
       formData.append("creator", auth.userId);
-      await sendRequest("http://localhost:5000/api/places", "POST", formData);
+      await sendRequest("http://localhost:5000/api/places", "POST", formData, {
+        Authorization: "Bearer " + auth.token,
+      });
       history.push("/");
     } catch (err) {}
   };
