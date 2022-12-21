@@ -5,7 +5,6 @@ import Button from "../../shared/components/FormElements/Button/Button";
 import { useForm } from "../../shared/hooks/form-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import ImagaeUpload from "../../shared/components/FormElements/ImageUpload";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
